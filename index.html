@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>China Macro Dashboard</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2315233b'/%3E%3Cpath d='M18 42h28v6H18zm6-12h22v6H24zm8-12h14v6H32z' fill='%23f5efe6'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      if (window.location.search) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has("v")) {
+          params.delete("v");
+          const nextSearch = params.toString();
+          const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ""}${window.location.hash}`;
+          window.history.replaceState({}, "", nextUrl);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="page-title">
+        <h1>China Macro Dashboard</h1>
+        <label class="page-search">
+          <span>Search</span>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search metrics, cycles, or tags..."
+            autocomplete="off"
+          />
+        </label>
+      </header>
+
+      <section class="insights-section">
+        <div class="section-heading">
+          <h2>What Changed Recently</h2>
+        </div>
+        <div class="insight-grid" id="insight-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="synthesis-section" id="synthesis-section" aria-live="polite"></section>
+
+      <main>
+        <section class="cycles-section">
+          <div class="section-heading">
+            <h2>Cycle Drilldowns</h2>
+          </div>
+          <div class="cycles-grid" id="cycles-grid" aria-live="polite"></div>
+          <p class="empty-state hidden" id="empty-state">
+            No metrics match the current filters. Try a broader search or switch back to all
+            metrics.
+          </p>
+        </section>
+
+        <section class="appendix-section">
+          <div class="section-heading">
+            <h2>Appendix</h2>
+            <p>Heatmap, raw releases, caveats, and source references.</p>
+          </div>
+          <div class="appendix-stack">
+            <details class="appendix-card">
+              <summary>
+                <div>
+                  <p class="appendix-kicker">System map</p>
+                  <h3>Cycle Heatmap</h3>
+                </div>
+                <span class="appendix-hint">Open the full cross-cycle map</span>
+              </summary>
+              <div class="appendix-body">
+                <p>
+                  This is the fast map of the full system. Each cycle card shows the signal mix
+                  inside that cycle and the few numbers worth checking first.
+                </p>
+                <div class="signal-grid" id="signal-grid" aria-live="polite"></div>
+              </div>
+            </details>
+
+            <details class="appendix-card">
+              <summary>
+                <div>
+                  <p class="appendix-kicker">Raw evidence</p>
+                  <h3>Latest Pulled Releases</h3>
+                </div>
+                <span class="appendix-hint">Open raw tables and release excerpts</span>
+              </summary>
+              <div class="appendix-body">
+                <div class="live-source-list" id="live-source-list"></div>
+              </div>
+            </details>
+
+            <details class="appendix-card">
+              <summary>
+                <div>
+                  <p class="appendix-kicker">Parsing notes</p>
+                  <h3>Snapshot Caveats</h3>
+                </div>
+                <span class="appendix-hint">See gaps, proxies, and fallback choices</span>
+              </summary>
+              <div class="appendix-body">
+                <div class="snapshot-notes" id="snapshot-notes"></div>
+              </div>
+            </details>
+
+            <details class="appendix-card">
+              <summary>
+                <div>
+                  <p class="appendix-kicker">Source stack</p>
+                  <h3>Primary Free Sources</h3>
+                </div>
+                <span class="appendix-hint">Official sources first, market fallbacks second</span>
+              </summary>
+              <div class="appendix-body">
+                <div class="source-grid" id="source-grid"></div>
+              </div>
+            </details>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="data.js?v=2"></script>
+    <script src="snapshot.js?v=2"></script>
+    <script src="app.js?v=2"></script>
+  </body>
+</html>
