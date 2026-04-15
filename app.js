@@ -2370,7 +2370,7 @@ function renderCycles(cyclePayloads) {
     const signalDescription = payload.signalMetrics.length
       ? "These are the freshest signals and the only ones used to drive the main briefing."
       : "This cycle does not have enough fresh monthly signals right now, so the best available structural context is shown first.";
-    const isOpen = index < 2;
+    const isOpen = false;
     const cardId = `cycle-card-${payload.cycle.id}`;
 
     const signalDirs = payload.signalMetrics.map((m) => economicDirection(inferTrend(m).direction, m.name));
